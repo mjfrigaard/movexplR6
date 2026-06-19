@@ -1,0 +1,29 @@
+Package: movexplR6
+Version: 0.0.0.9000
+Type: Package
+Title: Movie Explorer Shiny App-Package
+Description: A Shiny app-package for exploring movie data using R6 objects for
+    database management and filtering.
+Author: mjfrigaard [aut, cre]
+Maintainer: mjfrigaard <mjfrigaard@pm.me>
+License: MIT
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Imports:
+    R6,
+    shiny,
+    bslib,
+    dplyr,
+    ggplot2,
+    plotly,
+    DBI,
+    RSQLite,
+    dbplyr,
+    logger
+Suggests:
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown
+Config/testthat/edition: 3
+VignetteBuilder: knitr
+Config/roxygen2/version: 8.0.0
