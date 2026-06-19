@@ -24,9 +24,9 @@ cleaning up the connection.
 ``` r
 
 md <- MovieData$new(db_path)
-#> INFO [2026-06-19 15:56:42] Connecting to database: /home/runner/work/_temp/Library/movexplR6/extdata/movies.db
-#> INFO [2026-06-19 15:56:42] Database connection established
-#> INFO [2026-06-19 15:56:43] Loaded 12569 movies into memory
+#> INFO [2026-06-19 16:04:56] Connecting to database: /home/runner/work/_temp/Library/movexplR6/extdata/movies.db
+#> INFO [2026-06-19 16:04:56] Database connection established
+#> INFO [2026-06-19 16:04:57] Loaded 12569 movies into memory
 ```
 
 On initialization the class:
@@ -154,7 +154,7 @@ connection is also closed when the object is garbage collected.
 ``` r
 
 md$disconnect()
-#> INFO [2026-06-19 15:56:44] Database connection closed
+#> INFO [2026-06-19 16:04:58] Database connection closed
 DBI::dbIsValid(md$con)
 #> [1] FALSE
 ```
