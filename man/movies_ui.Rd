@@ -14,8 +14,8 @@ Builds a \code{bslib::page_sidebar()} layout with filter controls in the sidebar
 and the scatter plot in the main panel.
 }
 \examples{
-if (interactive()) {
-  shiny::shinyApp(ui = movies_ui(), server = movies_server)
+\dontrun{
+shiny::shinyApp(ui = movies_ui(), server = movies_server)
 }
 
 }

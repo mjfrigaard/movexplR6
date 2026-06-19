@@ -27,28 +27,6 @@ combines [Rotten Tomatoes](https://www.rottentomatoes.com/) and
 - Replacing `wellPanel` layouts with `bslib` (`page_sidebar`, `card`).
 - Wrapping all database and filter logic in an **R6 class** (`MovieData`).
 
-## Architecture
-
-The package is organized into three layers:
-
-```{r arch-diagram, echo = FALSE, results = "asis"}
-cat('
-```mermaid
-flowchart TD
-  LaunchApp["launch_app()"] --> MoviesUi["movies_ui()"]
-  LaunchApp --> MoviesSrv["movies_server()"]
-  MoviesSrv --> MvData["MovieData$new()"]
-  MvData --> LoadData["private$load_data()"]
-  LoadData --> SQLite[("inst/extdata/movies.db")]
-  MoviesSrv --> FiltSrv["mod_filters_server()"]
-  FiltSrv --> FilterMethod["MovieData$filter()"]
-  FilterMethod --> PlotSrv["mod_plot_server()"]
-  MoviesUi --> FiltUi["mod_filters_ui()"]
-  MoviesUi --> PlotUi["mod_plot_ui()"]
-```
-')
-```
-
 ## The `MovieData` R6 class
 
 `MovieData` owns the database connection and exposes two public methods:

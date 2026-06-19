@@ -52,19 +52,6 @@ about it.
 
 ## Data flow
 
-```{r flow-diagram, echo = FALSE, results = "asis"}
-cat('
-```mermaid
-flowchart LR
-  Inputs["User inputs"] --> FiltSrv["mod_filters_server()"]
-  FiltSrv -->|"filters() reactive"| MvFilt["MovieData$filter()"]
-  MvFilt -->|"movies() reactive"| PlotSrv["mod_plot_server()"]
-  PlotSrv --> ScatterOut["plotly scatter"]
-  PlotSrv --> CountOut["n_movies text"]
-```
-')
-```
-
 The server function in `movies_server.R` acts as the conductor: it owns the
 `MovieData` object, calls `$filter()` to derive the `movies` reactive, and
 passes both `movies` and `filters` down to `mod_plot_server()`.

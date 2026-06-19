@@ -11,8 +11,8 @@
 #' @family Application Components
 #'
 #' @examples
-#' if (interactive()) {
-#'   launch_app()
+#' \dontrun{
+#' launch_app()
 #' }
 #'
 #' @export

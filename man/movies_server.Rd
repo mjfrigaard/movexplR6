@@ -17,8 +17,8 @@ Initializes a \link{MovieData} R6 object, wires the filter module to the data
 object's \verb{$filter()} method, and passes reactive results to the plot module.
 }
 \examples{
-if (interactive()) {
-  shiny::shinyApp(ui = movies_ui(), server = movies_server)
+\dontrun{
+shiny::shinyApp(ui = movies_ui(), server = movies_server)
 }
 
 }

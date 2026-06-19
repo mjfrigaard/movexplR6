@@ -17,8 +17,8 @@ Entry point for the \code{movexplR6} package. Calls \code{\link[shiny:shinyApp]{
 package UI and server functions.
 }
 \examples{
-if (interactive()) {
-  launch_app()
+\dontrun{
+launch_app()
 }
 
 }
