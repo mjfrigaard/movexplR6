@@ -97,9 +97,9 @@ and <code>$finalize()</code> for cleaning up the connection.</p>
 </h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">md</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/MovieData.html">MovieData</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">db_path</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2026-06-19 15:49:37] Connecting to database: /home/runner/work/_temp/Library/movexplR6/extdata/movies.db</span></span>
-<span><span class="co">#&gt; INFO [2026-06-19 15:49:37] Database connection established</span></span>
-<span><span class="co">#&gt; INFO [2026-06-19 15:49:37] Loaded 12569 movies into memory</span></span></code></pre></div>
+<span><span class="co">#&gt; INFO [2026-06-19 15:56:42] Connecting to database: /home/runner/work/_temp/Library/movexplR6/extdata/movies.db</span></span>
+<span><span class="co">#&gt; INFO [2026-06-19 15:56:42] Database connection established</span></span>
+<span><span class="co">#&gt; INFO [2026-06-19 15:56:43] Loaded 12569 movies into memory</span></span></code></pre></div>
 <p>On initialization the class:</p>
 <ol style="list-style-type: decimal">
 <li>Opens a <code>DBI</code> connection to the SQLite file.</li>
@@ -197,7 +197,7 @@ private <code>finalize()</code> method delegates to
 object is garbage collected.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">md</span><span class="op">$</span><span class="fu">disconnect</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2026-06-19 15:49:38] Database connection closed</span></span>
+<span><span class="co">#&gt; INFO [2026-06-19 15:56:44] Database connection closed</span></span>
 <span><span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbIsValid.html" class="external-link">dbIsValid</a></span><span class="op">(</span><span class="va">md</span><span class="op">$</span><span class="va">con</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] FALSE</span></span></code></pre></div>
 </div>
