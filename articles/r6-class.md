@@ -145,9 +145,9 @@ server calls it on every input change.
 ``` r
 
 md <- MovieData$new(db_path)
-#> INFO [2026-07-13 19:04:45] Connecting to database: /home/runner/.cache/R/renv/library/movexplR6-8fe87c7d/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/movexplR6/extdata/movies.db
-#> INFO [2026-07-13 19:04:45] Database connection established
-#> INFO [2026-07-13 19:04:45] Loaded 12569 movies into memory
+#> INFO [2026-07-14 21:55:26] Connecting to database: /home/runner/.cache/R/renv/library/movexplR6-8fe87c7d/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/movexplR6/extdata/movies.db
+#> INFO [2026-07-14 21:55:26] Database connection established
+#> INFO [2026-07-14 21:55:27] Loaded 12569 movies into memory
 
 # Default call — wide-open filters
 nrow(md$filter())
@@ -206,7 +206,7 @@ private = list(
 DBI::dbIsValid(md$con)   # TRUE before disconnect
 #> [1] TRUE
 md$disconnect()
-#> INFO [2026-07-13 19:04:45] Database connection closed
+#> INFO [2026-07-14 21:55:27] Database connection closed
 DBI::dbIsValid(md$con)   # FALSE after
 #> [1] FALSE
 ```
