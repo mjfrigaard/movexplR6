@@ -50,9 +50,12 @@ Logging is handled via the \code{logger} package. Set the threshold with
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{db_path}}{Path to the \code{movies.db} SQLite file.}
+      \item{\code{db_path}}{Path to the SQLite database file (e.g., \code{movies.db}).}
     }
     \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    The initialized \code{MovieData} object invisibly.
   }
 }
 
@@ -77,18 +80,18 @@ Logging is handled via the \code{logger} package. Set the threshold with
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{reviews}}{Minimum number of Rotten Tomatoes reviews.}
-      \item{\code{oscars}}{Minimum number of Oscar wins.}
-      \item{\code{year}}{Integer vector of length 2: \code{c(min_year, max_year)}.}
-      \item{\code{boxoffice}}{Numeric vector of length 2: box-office range in millions.}
-      \item{\code{genre}}{Genre string; \code{"All"} disables the filter.}
-      \item{\code{director}}{Partial director name; empty string disables the filter.}
-      \item{\code{cast}}{Partial cast name; empty string disables the filter.}
+      \item{\code{reviews}}{Minimum number of Rotten Tomatoes reviews (default: 10).}
+      \item{\code{oscars}}{Minimum number of Oscar wins (default: 0).}
+      \item{\code{year}}{Integer vector of length 2: \code{c(min_year, max_year)} (default: \code{c(1940, 2014)}).}
+      \item{\code{boxoffice}}{Numeric vector of length 2: box-office range in millions (default: \code{c(0, 800)}).}
+      \item{\code{genre}}{Genre string; \code{"All"} disables the filter (default: \code{"All"}).}
+      \item{\code{director}}{Partial director name; empty string disables the filter (default: \code{""}).}
+      \item{\code{cast}}{Partial cast name; empty string disables the filter (default: \code{""}).}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A filtered data frame with an added \code{has_oscar} column.
+    A filtered data frame with rows matching all criteria and an added \code{has_oscar} column (\code{"Yes"} or \code{"No"}).
   }
 }
 
@@ -97,11 +100,18 @@ Logging is handled via the \code{logger} package. Set the threshold with
 \if{latex}{\out{\hypertarget{method-MovieData-disconnect}{}}}
 \subsection{\code{MovieData$disconnect()}}{
   Explicitly close the database connection.
-Call this from \code{shiny::onStop()} or in tests via \code{on.exit()}.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
     \preformatted{MovieData$disconnect()}
     \if{html}{\out{</div>}}
+  }
+  \subsection{Details}{
+    Call this from \code{shiny::onStop()} or in tests via \code{on.exit()}.
+The private \code{finalize()} method calls this automatically when the object
+is garbage collected.
+  }
+  \subsection{Returns}{
+    Returns \code{NULL} invisibly; called for side effects.
   }
 }
 

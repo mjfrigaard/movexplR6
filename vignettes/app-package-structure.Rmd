@@ -24,7 +24,7 @@ It satisfies two requirements simultaneously:
   runs the app.
 
 This combination gives a Shiny app everything a package provides: proper
-dependency management, a documentation system, unit tests, and vignettes —
+dependency management, a documentation system, unit tests, and vignettes -
 without any extra tooling.
 
 ## File layout
@@ -118,7 +118,7 @@ export(movies_server)
 export(movies_ui)
 ```
 
-Exporting module functions and `MovieData` means users can call them directly —
+Exporting module functions and `MovieData` means users can call them directly -
 useful for composing the package with other packages or for testing.
 
 ## The `R/` directory
@@ -132,9 +132,9 @@ them easier to locate and test.
 | `utils.R` | `axis_vars` named vector shared by modules |
 | `mod_filters.R` | `mod_filters_ui()` + `mod_filters_server()` |
 | `mod_plot.R` | `mod_plot_ui()` + `mod_plot_server()` |
-| `movies_ui.R` | `movies_ui()` — top-level layout |
-| `movies_server.R` | `movies_server()` — wires modules to MovieData |
-| `launch_app.R` | `launch_app()` — calls `shiny::shinyApp()` |
+| `movies_ui.R` | `movies_ui()` - top-level layout |
+| `movies_server.R` | `movies_server()` - wires modules to MovieData |
+| `launch_app.R` | `launch_app()` - calls `shiny::shinyApp()` |
 
 No `global.R`, no `ui.R`, no `server.R`. Everything that was in those files
 in the original `051-movie-explorer` example now lives in named, documented,
@@ -155,7 +155,7 @@ db_path <- system.file("extdata/movies.db", package = "movexplR6")
 
 This means `MovieData$new()` never needs a hard-coded file path.
 
-## `app.R` — the entry point
+## `app.R` - the entry point
 
 ```{r app-r, eval = FALSE}
 pkgload::load_all()
@@ -242,4 +242,4 @@ launch_app()
 
 The key insight is that `devtools::load_all()` + `launch_app()` gives a fast
 edit-reload-test loop: edit a file in `R/`, call `load_all()` in the console,
-and run the app again — no install required.
+and run the app again - no install required.

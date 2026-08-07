@@ -16,9 +16,10 @@
 #' @export
 movies_ui <- function() {
   bslib::page_sidebar(
-    title   = "Movie Explorer",
+    title   = "Movie Explorer (R6)",
     sidebar = bslib::sidebar(
-      mod_filters_ui("filters")
+      mod_filters_ui("filters"),
+      width = "360px"
     ),
     mod_plot_ui("plot")
   )

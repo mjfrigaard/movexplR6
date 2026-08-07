@@ -8,7 +8,7 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/README-",
+  fig.path = "man/figures/",
   out.width = "100%"
 )
 ```
@@ -28,5 +28,14 @@ You can install the development version of `movexplR6` from [GitHub](https://git
 # install.packages("pak")
 pak::pak("mjfrigaard/movexplR6")
 ```
+
+Launch: 
+
+``` r
+library(movexplR6)
+launch_app()
+```
+
+![](man/figures/launch.png)
 
 Check the documentation for more information. 

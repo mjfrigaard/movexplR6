@@ -26,7 +26,8 @@ MovieData <- R6::R6Class(
     all_movies = NULL,
 
     #' @description Connect to the SQLite database and load all movie data.
-    #' @param db_path Path to the `movies.db` SQLite file.
+    #' @param db_path Path to the SQLite database file (e.g., `movies.db`).
+    #' @return The initialized `MovieData` object invisibly.
     initialize = function(db_path) {
       logger::log_info("Connecting to database: {db_path}")
       tryCatch(
@@ -52,14 +53,14 @@ MovieData <- R6::R6Class(
     },
 
     #' @description Filter the in-memory data frame using input values.
-    #' @param reviews Minimum number of Rotten Tomatoes reviews.
-    #' @param oscars Minimum number of Oscar wins.
-    #' @param year Integer vector of length 2: `c(min_year, max_year)`.
-    #' @param boxoffice Numeric vector of length 2: box-office range in millions.
-    #' @param genre Genre string; `"All"` disables the filter.
-    #' @param director Partial director name; empty string disables the filter.
-    #' @param cast Partial cast name; empty string disables the filter.
-    #' @return A filtered data frame with an added `has_oscar` column.
+    #' @param reviews Minimum number of Rotten Tomatoes reviews (default: 10).
+    #' @param oscars Minimum number of Oscar wins (default: 0).
+    #' @param year Integer vector of length 2: `c(min_year, max_year)` (default: `c(1940, 2014)`).
+    #' @param boxoffice Numeric vector of length 2: box-office range in millions (default: `c(0, 800)`).
+    #' @param genre Genre string; `"All"` disables the filter (default: `"All"`).
+    #' @param director Partial director name; empty string disables the filter (default: `""`).
+    #' @param cast Partial cast name; empty string disables the filter (default: `""`).
+    #' @return A filtered data frame with rows matching all criteria and an added `has_oscar` column (`"Yes"` or `"No"`).
     filter = function(
       reviews   = 10,
       oscars    = 0,
@@ -117,7 +118,10 @@ MovieData <- R6::R6Class(
     },
 
     #' @description Explicitly close the database connection.
-    #' Call this from `shiny::onStop()` or in tests via `on.exit()`.
+    #' @details Call this from `shiny::onStop()` or in tests via `on.exit()`.
+    #' The private `finalize()` method calls this automatically when the object
+    #' is garbage collected.
+    #' @return Returns `NULL` invisibly; called for side effects.
     disconnect = function() {
       if (!is.null(self$con) && DBI::dbIsValid(self$con)) {
         tryCatch(

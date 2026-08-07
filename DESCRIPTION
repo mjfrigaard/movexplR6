@@ -4,7 +4,7 @@ Type: Package
 Title: Movie Explorer Shiny App-Package
 Description: A Shiny app-package for exploring movie data using R6 objects for
     database management and filtering.
-Author: mjfrigaard [aut, cre]
+Author: Martin Frigaard [aut, cre]
 Maintainer: mjfrigaard <mjfrigaard@pm.me>
 License: MIT
 Encoding: UTF-8
@@ -26,5 +26,5 @@ Suggests:
     rmarkdown
 Config/testthat/edition: 3
 VignetteBuilder: knitr
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.0
 URL: https://mjfrigaard.github.io/movexplR6/

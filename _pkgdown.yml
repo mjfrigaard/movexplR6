@@ -1,5 +1,9 @@
 url: https://mjfrigaard.github.io/movexplR6/
 
+navbar:
+  bg: primary       # paint the bar with $primary (Atomic Blue)
+  type: dark        # light text for contrast on the deep blue bar
+
 template:
   bootstrap: 5
   theme: arrow-light
