@@ -2,9 +2,9 @@
 
 ## Why R6 in a Shiny app?
 
-Shiny’s built-in tools for shared mutable state - `reactiveValues()`,
-`reactive()`, closures - work well for small apps. As an app grows,
-state tends to scatter across the server function and modules, making it
+Shiny’s built-in tools for shared mutable state (`reactiveValues()`,
+`reactive()`, closures) work well for small apps. As an app grows, state
+tends to scatter across the server function and modules, making it
 harder to reason about ownership and lifecycle.
 
 An **R6 class** addresses this by bundling related data and the
@@ -17,7 +17,7 @@ everything related to the database:
 - How data is filtered (`$filter()`)
 - How the connection is closed (`$disconnect()`)
 
-The Shiny server just calls methods on the object; it never touches the
+The Shiny server just calls methods on the object. It never touches the
 connection or SQL directly.
 
 ## R6 class anatomy
@@ -49,10 +49,10 @@ obj$helper()    # error: private
 
 The key rules:
 
-- `public` members are the class’s API - callable and readable from
-  outside.
-- `private` members are implementation details - only callable via
-  `private$` inside other methods.
+- `public` members are the class’s API (callable and readable from
+  outside).
+- `private` members are implementation details (only callable via
+  `private$` inside other methods).
 - `self$` refers to the current object’s public members.
 - `private$` refers to the current object’s private members.
 
@@ -111,7 +111,7 @@ server) knows initialization failed.
 ### `private$load_data()`
 
 `load_data()` is private because it is an implementation detail of
-`initialize()`. No caller outside the class should call it directly.
+`initialize()` No caller outside the class should call it directly.
 
 ``` r
 
@@ -134,8 +134,8 @@ private = list(
 
 Collecting into an in-memory data frame
 ([`dplyr::collect()`](https://dplyr.tidyverse.org/reference/compute.html))
-means all subsequent `$filter()` calls work on a plain data frame -
-fast, no repeated SQL round-trips.
+means all subsequent `$filter()` calls work on a plain data frame (fast,
+no repeated SQL round-trips).
 
 ### `$filter()`
 
@@ -145,9 +145,9 @@ server calls it on every input change.
 ``` r
 
 md <- MovieData$new(db_path)
-#> INFO [2026-08-07 19:23:25] Connecting to database: /home/runner/.cache/R/renv/library/movexplR6-8fe87c7d/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/movexplR6/extdata/movies.db
-#> INFO [2026-08-07 19:23:26] Database connection established
-#> INFO [2026-08-07 19:23:26] Loaded 12569 movies into memory
+#> INFO [2026-08-07 19:49:52] Connecting to database: /home/runner/.cache/R/renv/library/movexplR6-8fe87c7d/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/movexplR6/extdata/movies.db
+#> INFO [2026-08-07 19:49:52] Database connection established
+#> INFO [2026-08-07 19:49:53] Loaded 12569 movies into memory
 
 # Default call - wide-open filters
 nrow(md$filter())
@@ -195,9 +195,9 @@ private = list(
 
 - `finalize()` **must** be private as of R6 2.4.0; making it public
   raises a deprecation warning. It is the GC safety net.
-- `$disconnect()` is public so it can be called explicitly -
-  `shiny::onStop(function() movie_data$disconnect())` - without relying
-  on garbage collection timing.
+- `$disconnect()` is public so it can be called explicitly without
+  relying on garbage collection timing
+  (`shiny::onStop(function() movie_data$disconnect())`)  
 - `$disconnect()` only warns (never stops) on error: a failure to
   disconnect a closing app should not produce an unhandled exception.
 
@@ -206,7 +206,7 @@ private = list(
 DBI::dbIsValid(md$con)   # TRUE before disconnect
 #> [1] TRUE
 md$disconnect()
-#> INFO [2026-08-07 19:23:26] Database connection closed
+#> INFO [2026-08-07 19:49:53] Database connection closed
 DBI::dbIsValid(md$con)   # FALSE after
 #> [1] FALSE
 ```
@@ -250,5 +250,5 @@ lifetime of the session.
 | **R6 class** | Object fields | Explicit (`$disconnect()`) | **Yes** |
 
 Because `MovieData` is a plain R object, you can use it in unit tests,
-scripts, or other packages without starting a Shiny session - the
+scripts, or other packages without starting a Shiny session. The
 `test-MovieData.R` test file demonstrates this directly.

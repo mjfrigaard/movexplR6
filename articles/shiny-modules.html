@@ -77,12 +77,12 @@ identified by a namespace ID. Modules solve two problems that appear as
 apps grow:</p>
 <ol style="list-style-type: decimal">
 <li>
-<strong>ID collisions</strong> - two inputs named
+<strong>ID collisions</strong>: two inputs named
 <code>"genre"</code> in different parts of the app would clash. Modules
 prefix every ID with their namespace so <code>"filters-genre"</code> and
 <code>"plot-genre"</code> never conflict.</li>
 <li>
-<strong>Coupling</strong> - without modules, server logic for
+<strong>Coupling</strong>: without modules, server logic for
 unrelated features shares the same <code>input</code>,
 <code>output</code>, and <code>session</code> objects. Modules give each
 feature its own scope.</li>
@@ -106,14 +106,14 @@ namespacing function. Every input and output ID is wrapped with it:</p>
 <code>shiny::moduleServer(id, ...)</code>, Shiny automatically applies
 the same namespace to <code>input</code>, <code>output</code>, and
 <code>session</code>, so <code>input$reviews</code> inside the module
-body refers to <code>"filters-reviews"</code> in the global session -
-without the module author or the caller having to think about it.</p>
+body refers to <code>"filters-reviews"</code> in the global session
+(without the module author or the caller having to think about it).</p>
 </div>
 <div class="section level2">
 <h2 id="data-flow">Data flow<a class="anchor" aria-label="anchor" href="#data-flow"></a>
 </h2>
 <p>The server function in <code>movies_server.R</code> acts as the
-conductor: it owns the <code>MovieData</code> object, calls
+conductor. It owns the <code>MovieData</code> object, calls
 <code>$filter()</code> to derive the <code>movies</code> reactive, and
 passes both <code>movies</code> and <code>filters</code> down to
 <code><a href="../reference/mod_plot_server.html">mod_plot_server()</a></code>.</p>
@@ -126,7 +126,7 @@ passes both <code>movies</code> and <code>filters</code> down to
 <h3 id="ui">UI<a class="anchor" aria-label="anchor" href="#ui"></a>
 </h3>
 <p><code>mod_filters_ui(id)</code> renders two <code><a href="https://rstudio.github.io/bslib/reference/card.html" class="external-link">bslib::card</a></code>
-elements: one for filter controls and one for axis variable
+elements. one for filter controls, and one for axis variable
 selectors.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mod_filters_ui</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op">{</span></span>
@@ -153,8 +153,8 @@ selectors.</p>
 <h3 id="server">Server<a class="anchor" aria-label="anchor" href="#server"></a>
 </h3>
 <p><code>mod_filters_server(id)</code> <strong>returns</strong> a
-reactive list. This is the module’s output - the value it hands back to
-whoever called it.</p>
+reactive list. This is the module’s output (the value it hands back to
+whoever called it).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mod_filters_server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/moduleServer.html" class="external-link">moduleServer</a></span><span class="op">(</span><span class="va">id</span>, <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
@@ -224,7 +224,7 @@ text output for the movie count.</p>
 </h3>
 <p><code>mod_plot_server(id, movies, filters)</code> takes <strong>two
 reactive arguments</strong> - the filtered data frame and the filter
-selections - passed in from the parent server.</p>
+selections (passed in from the parent server).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mod_plot_server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">id</span>, <span class="va">movies</span>, <span class="va">filters</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/moduleServer.html" class="external-link">moduleServer</a></span><span class="op">(</span><span class="va">id</span>, <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
@@ -265,11 +265,12 @@ aesthetic driving the hover tooltip.</p>
 <div class="section level3">
 <h3 id="passing-reactives-as-arguments">Passing reactives as arguments<a class="anchor" aria-label="anchor" href="#passing-reactives-as-arguments"></a>
 </h3>
-<p>A key design point: <code>movies</code> and <code>filters</code> are
-passed as <strong>reactive objects</strong>, not as their values. The
-module server calls them (<code>movies()</code>, <code>filters()</code>)
-inside render functions, which means Shiny knows to re-run the render
-whenever either reactive invalidates.</p>
+<p>A key design point here is <code>movies</code> and
+<code>filters</code> are passed as <strong>reactive objects</strong>,
+not as their values. The module server calls them
+(<code>movies()</code>, <code>filters()</code>) inside render functions,
+which means Shiny knows to re-run the render whenever either reactive
+invalidates.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># In movies_server():</span></span>
 <span><span class="va">filters</span>    <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mod_filters_server.html">mod_filters_server</a></span><span class="op">(</span><span class="st">"filters"</span><span class="op">)</span>   <span class="co"># reactive list</span></span>
@@ -338,7 +339,8 @@ module subscribe to invalidation events correctly.</p>
 <code>MovieData</code> object, calls <code><a href="../reference/mod_filters_server.html">mod_filters_server()</a></code>
 to get the <code>filters</code> reactive, derives <code>movies</code>
 from it, then passes both to <code><a href="../reference/mod_plot_server.html">mod_plot_server()</a></code>. No output
-rendering happens here - that is fully delegated to the modules.</p>
+rendering happens here (rendering is fully delegated to the
+modules).</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

@@ -5,7 +5,8 @@
 `movexplR6` is a Shiny app-package for exploring a movie database that
 combines [Rotten Tomatoes](https://www.rottentomatoes.com/) and
 [IMDb](https://www.imdb.com/) data. It modernizes the classic
-`051-movie-explorer` Shiny example by:
+[`051-movie-explorer`](https://github.com/rstudio/shiny-examples/tree/main/051-movie-explorer)
+Shiny example by:
 
 - Replacing `ggvis` with `ggplot2` + `plotly` for interactive scatter
   plots.
@@ -24,9 +25,9 @@ cleaning up the connection.
 ``` r
 
 md <- MovieData$new(db_path)
-#> INFO [2026-08-07 19:23:21] Connecting to database: /home/runner/.cache/R/renv/library/movexplR6-8fe87c7d/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/movexplR6/extdata/movies.db
-#> INFO [2026-08-07 19:23:22] Database connection established
-#> INFO [2026-08-07 19:23:22] Loaded 12569 movies into memory
+#> INFO [2026-08-07 19:49:48] Connecting to database: /home/runner/.cache/R/renv/library/movexplR6-8fe87c7d/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/movexplR6/extdata/movies.db
+#> INFO [2026-08-07 19:49:48] Database connection established
+#> INFO [2026-08-07 19:49:49] Loaded 12569 movies into memory
 ```
 
 On initialization the class:
@@ -154,7 +155,7 @@ connection is also closed when the object is garbage collected.
 ``` r
 
 md$disconnect()
-#> INFO [2026-08-07 19:23:23] Database connection closed
+#> INFO [2026-08-07 19:49:50] Database connection closed
 DBI::dbIsValid(md$con)
 #> [1] FALSE
 ```

@@ -72,8 +72,8 @@
 <div class="section level2">
 <h2 id="why-r6-in-a-shiny-app">Why R6 in a Shiny app?<a class="anchor" aria-label="anchor" href="#why-r6-in-a-shiny-app"></a>
 </h2>
-<p>Shiny’s built-in tools for shared mutable state -
-<code>reactiveValues()</code>, <code>reactive()</code>, closures - work
+<p>Shiny’s built-in tools for shared mutable state
+(<code>reactiveValues()</code>, <code>reactive()</code>, closures) work
 well for small apps. As an app grows, state tends to scatter across the
 server function and modules, making it harder to reason about ownership
 and lifecycle.</p>
@@ -88,7 +88,7 @@ database:</p>
 <li>How data is filtered (<code>$filter()</code>)</li>
 <li>How the connection is closed (<code>$disconnect()</code>)</li>
 </ul>
-<p>The Shiny server just calls methods on the object; it never touches
+<p>The Shiny server just calls methods on the object. It never touches
 the connection or SQL directly.</p>
 </div>
 <div class="section level2">
@@ -118,11 +118,11 @@ important arguments are <code>public</code> and
 <p>The key rules:</p>
 <ul>
 <li>
-<code>public</code> members are the class’s API - callable and
-readable from outside.</li>
+<code>public</code> members are the class’s API (callable and
+readable from outside).</li>
 <li>
-<code>private</code> members are implementation details - only
-callable via <code>private$</code> inside other methods.</li>
+<code>private</code> members are implementation details (only
+callable via <code>private$</code> inside other methods).</li>
 <li>
 <code>self$</code> refers to the current object’s public
 members.</li>
@@ -186,7 +186,7 @@ failed.</p>
 <code>private$load_data()</code><a class="anchor" aria-label="anchor" href="#privateload_data"></a>
 </h3>
 <p><code>load_data()</code> is private because it is an implementation
-detail of <code>initialize()</code>. No caller outside the class should
+detail of <code>initialize()</code> No caller outside the class should
 call it directly.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">private</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -206,8 +206,8 @@ call it directly.</p>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Collecting into an in-memory data frame
 (<code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">dplyr::collect()</a></code>) means all subsequent
-<code>$filter()</code> calls work on a plain data frame - fast, no
-repeated SQL round-trips.</p>
+<code>$filter()</code> calls work on a plain data frame (fast, no
+repeated SQL round-trips).</p>
 </div>
 <div class="section level3">
 <h3 id="filter">
@@ -217,9 +217,9 @@ repeated SQL round-trips.</p>
 because the server calls it on every input change.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">md</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/MovieData.html">MovieData</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">db_path</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2026-08-07 19:23:25] Connecting to database: /home/runner/.cache/R/renv/library/movexplR6-8fe87c7d/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/movexplR6/extdata/movies.db</span></span>
-<span><span class="co">#&gt; INFO [2026-08-07 19:23:26] Database connection established</span></span>
-<span><span class="co">#&gt; INFO [2026-08-07 19:23:26] Loaded 12569 movies into memory</span></span>
+<span><span class="co">#&gt; INFO [2026-08-07 19:49:52] Connecting to database: /home/runner/.cache/R/renv/library/movexplR6-8fe87c7d/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/movexplR6/extdata/movies.db</span></span>
+<span><span class="co">#&gt; INFO [2026-08-07 19:49:52] Database connection established</span></span>
+<span><span class="co">#&gt; INFO [2026-08-07 19:49:53] Loaded 12569 movies into memory</span></span>
 <span></span>
 <span><span class="co"># Default call - wide-open filters</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">md</span><span class="op">$</span><span class="fu">filter</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
@@ -268,8 +268,9 @@ development.</p>
 safety net.</li>
 <li>
 <code>$disconnect()</code> is public so it can be called explicitly
-- <code>shiny::onStop(function() movie_data$disconnect())</code> -
-without relying on garbage collection timing.</li>
+without relying on garbage collection timing
+(<code>shiny::onStop(function() movie_data$disconnect())</code>)<br>
+</li>
 <li>
 <code>$disconnect()</code> only warns (never stops) on error: a
 failure to disconnect a closing app should not produce an unhandled
@@ -279,7 +280,7 @@ exception.</li>
 <code class="sourceCode R"><span><span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbIsValid.html" class="external-link">dbIsValid</a></span><span class="op">(</span><span class="va">md</span><span class="op">$</span><span class="va">con</span><span class="op">)</span>   <span class="co"># TRUE before disconnect</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span>
 <span><span class="va">md</span><span class="op">$</span><span class="fu">disconnect</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2026-08-07 19:23:26] Database connection closed</span></span>
+<span><span class="co">#&gt; INFO [2026-08-07 19:49:53] Database connection closed</span></span>
 <span><span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbIsValid.html" class="external-link">dbIsValid</a></span><span class="op">(</span><span class="va">md</span><span class="op">$</span><span class="va">con</span><span class="op">)</span>   <span class="co"># FALSE after</span></span>
 <span><span class="co">#&gt; [1] FALSE</span></span></code></pre></div>
 </div>
@@ -351,8 +352,8 @@ the session.</p>
 </tbody>
 </table>
 <p>Because <code>MovieData</code> is a plain R object, you can use it in
-unit tests, scripts, or other packages without starting a Shiny session
-- the <code>test-MovieData.R</code> test file demonstrates this
+unit tests, scripts, or other packages without starting a Shiny session.
+The <code>test-MovieData.R</code> test file demonstrates this
 directly.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
