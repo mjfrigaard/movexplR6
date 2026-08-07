@@ -21,7 +21,8 @@ db_path <- system.file("extdata/movies.db", package = "movexplR6")
 `movexplR6` is a Shiny app-package for exploring a movie database that
 combines [Rotten Tomatoes](https://www.rottentomatoes.com/) and
 [IMDb](https://www.imdb.com/) data. It modernizes the classic
-`051-movie-explorer` Shiny example by:
+[`051-movie-explorer` ](https://github.com/rstudio/shiny-examples/tree/main/051-movie-explorer) 
+Shiny example by:
 
 - Replacing `ggvis` with `ggplot2` + `plotly` for interactive scatter plots.
 - Replacing `wellPanel` layouts with `bslib` (`page_sidebar`, `card`).

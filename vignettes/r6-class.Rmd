@@ -18,8 +18,8 @@ db_path <- system.file("extdata/movies.db", package = "movexplR6")
 
 ## Why R6 in a Shiny app?
 
-Shiny's built-in tools for shared mutable state - `reactiveValues()`,
-`reactive()`, closures - work well for small apps. As an app grows, state
+Shiny's built-in tools for shared mutable state (`reactiveValues()`,
+`reactive()`, closures) work well for small apps. As an app grows, state
 tends to scatter across the server function and modules, making it harder to
 reason about ownership and lifecycle.
 
@@ -32,7 +32,7 @@ that data into a single object with explicit public and private boundaries. For
 - How data is filtered (`$filter()`)
 - How the connection is closed (`$disconnect()`)
 
-The Shiny server just calls methods on the object; it never touches the
+The Shiny server just calls methods on the object. It never touches the
 connection or SQL directly.
 
 ## R6 class anatomy
@@ -62,9 +62,9 @@ obj$helper()    # error: private
 
 The key rules:
 
-- `public` members are the class's API - callable and readable from outside.
-- `private` members are implementation details - only callable via `private$`
-  inside other methods.
+- `public` members are the class's API (callable and readable from outside).
+- `private` members are implementation details (only callable via `private$`
+  inside other methods).
 - `self$` refers to the current object's public members.
 - `private$` refers to the current object's private members.
 
@@ -119,7 +119,7 @@ caller (the Shiny server) knows initialization failed.
 ### `private$load_data()`
 
 `load_data()` is private because it is an implementation detail of
-`initialize()`. No caller outside the class should call it directly.
+`initialize()` No caller outside the class should call it directly.
 
 ```{r load-data, eval = FALSE}
 private = list(
@@ -140,8 +140,8 @@ private = list(
 ```
 
 Collecting into an in-memory data frame (`dplyr::collect()`) means all
-subsequent `$filter()` calls work on a plain data frame - fast, no repeated
-SQL round-trips.
+subsequent `$filter()` calls work on a plain data frame (fast, no repeated
+SQL round-trips).
 
 ### `$filter()`
 
@@ -193,9 +193,8 @@ private = list(
 
 - `finalize()` **must** be private as of R6 2.4.0; making it public raises a
   deprecation warning. It is the GC safety net.
-- `$disconnect()` is public so it can be called explicitly -
-  `shiny::onStop(function() movie_data$disconnect())` - without relying on
-  garbage collection timing.
+- `$disconnect()` is public so it can be called explicitly without relying on
+  garbage collection timing (`shiny::onStop(function() movie_data$disconnect())`)  
 - `$disconnect()` only warns (never stops) on error: a failure to disconnect
   a closing app should not produce an unhandled exception.
 
@@ -242,5 +241,5 @@ in-memory `$all_movies` data frame for the lifetime of the session.
 | **R6 class** | Object fields | Explicit (`$disconnect()`) | **Yes** |
 
 Because `MovieData` is a plain R object, you can use it in unit tests,
-scripts, or other packages without starting a Shiny session - the `test-MovieData.R`
+scripts, or other packages without starting a Shiny session. The `test-MovieData.R`
 test file demonstrates this directly.
