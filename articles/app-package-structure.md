@@ -11,8 +11,8 @@ application. It satisfies two requirements simultaneously:
   function (and an `app.R` entry point) that runs the app.
 
 This combination gives a Shiny app everything a package provides: proper
-dependency management, a documentation system, unit tests, and vignettes
-— without any extra tooling.
+dependency management, a documentation system, unit tests, and
+vignettes - without any extra tooling.
 
 ## File layout
 
@@ -109,7 +109,7 @@ export(movies_ui)
 ```
 
 Exporting module functions and `MovieData` means users can call them
-directly — useful for composing the package with other packages or for
+directly - useful for composing the package with other packages or for
 testing.
 
 ## The `R/` directory
@@ -123,9 +123,9 @@ single-purpose makes them easier to locate and test.
 | `utils.R` | `axis_vars` named vector shared by modules |
 | `mod_filters.R` | [`mod_filters_ui()`](https://mjfrigaard.github.io/movexplR6/reference/mod_filters_ui.md) + [`mod_filters_server()`](https://mjfrigaard.github.io/movexplR6/reference/mod_filters_server.md) |
 | `mod_plot.R` | [`mod_plot_ui()`](https://mjfrigaard.github.io/movexplR6/reference/mod_plot_ui.md) + [`mod_plot_server()`](https://mjfrigaard.github.io/movexplR6/reference/mod_plot_server.md) |
-| `movies_ui.R` | [`movies_ui()`](https://mjfrigaard.github.io/movexplR6/reference/movies_ui.md) — top-level layout |
-| `movies_server.R` | [`movies_server()`](https://mjfrigaard.github.io/movexplR6/reference/movies_server.md) — wires modules to MovieData |
-| `launch_app.R` | [`launch_app()`](https://mjfrigaard.github.io/movexplR6/reference/launch_app.md) — calls [`shiny::shinyApp()`](https://rdrr.io/pkg/shiny/man/shinyApp.html) |
+| `movies_ui.R` | [`movies_ui()`](https://mjfrigaard.github.io/movexplR6/reference/movies_ui.md) - top-level layout |
+| `movies_server.R` | [`movies_server()`](https://mjfrigaard.github.io/movexplR6/reference/movies_server.md) - wires modules to MovieData |
+| `launch_app.R` | [`launch_app()`](https://mjfrigaard.github.io/movexplR6/reference/launch_app.md) - calls [`shiny::shinyApp()`](https://rdrr.io/pkg/shiny/man/shinyApp.html) |
 
 No `global.R`, no `ui.R`, no `server.R`. Everything that was in those
 files in the original `051-movie-explorer` example now lives in named,
@@ -148,7 +148,7 @@ db_path <- system.file("extdata/movies.db", package = "movexplR6")
 
 This means `MovieData$new()` never needs a hard-coded file path.
 
-## `app.R` — the entry point
+## `app.R` - the entry point
 
 ``` r
 
@@ -248,5 +248,5 @@ launch_app()
 The key insight is that `devtools::load_all()` +
 [`launch_app()`](https://mjfrigaard.github.io/movexplR6/reference/launch_app.md)
 gives a fast edit-reload-test loop: edit a file in `R/`, call
-`load_all()` in the console, and run the app again — no install
+`load_all()` in the console, and run the app again - no install
 required.

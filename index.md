@@ -15,4 +15,14 @@ You can install the development version of `movexplR6` from
 pak::pak("mjfrigaard/movexplR6")
 ```
 
+Launch:
+
+``` r
+
+library(movexplR6)
+launch_app()
+```
+
+![](reference/figures/launch.png)
+
 Check the documentation for more information.

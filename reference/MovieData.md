@@ -53,7 +53,11 @@ Connect to the SQLite database and load all movie data.
 
 - `db_path`:
 
-  Path to the `movies.db` SQLite file.
+  Path to the SQLite database file (e.g., `movies.db`).
+
+#### Returns
+
+The initialized `MovieData` object invisibly.
 
 ------------------------------------------------------------------------
 
@@ -77,47 +81,61 @@ Filter the in-memory data frame using input values.
 
 - `reviews`:
 
-  Minimum number of Rotten Tomatoes reviews.
+  Minimum number of Rotten Tomatoes reviews (default: 10).
 
 - `oscars`:
 
-  Minimum number of Oscar wins.
+  Minimum number of Oscar wins (default: 0).
 
 - `year`:
 
-  Integer vector of length 2: `c(min_year, max_year)`.
+  Integer vector of length 2: `c(min_year, max_year)` (default:
+  `c(1940, 2014)`).
 
 - `boxoffice`:
 
-  Numeric vector of length 2: box-office range in millions.
+  Numeric vector of length 2: box-office range in millions (default:
+  `c(0, 800)`).
 
 - `genre`:
 
-  Genre string; `"All"` disables the filter.
+  Genre string; `"All"` disables the filter (default: `"All"`).
 
 - `director`:
 
-  Partial director name; empty string disables the filter.
+  Partial director name; empty string disables the filter (default:
+  `""`).
 
 - `cast`:
 
-  Partial cast name; empty string disables the filter.
+  Partial cast name; empty string disables the filter (default: `""`).
 
 #### Returns
 
-A filtered data frame with an added `has_oscar` column.
+A filtered data frame with rows matching all criteria and an added
+`has_oscar` column (`"Yes"` or `"No"`).
 
 ------------------------------------------------------------------------
 
 ### `MovieData$disconnect()`
 
-Explicitly close the database connection. Call this from
-[`shiny::onStop()`](https://rdrr.io/pkg/shiny/man/onStop.html) or in
-tests via [`on.exit()`](https://rdrr.io/r/base/on.exit.html).
+Explicitly close the database connection.
 
 #### Usage
 
     MovieData$disconnect()
+
+#### Details
+
+Call this from
+[`shiny::onStop()`](https://rdrr.io/pkg/shiny/man/onStop.html) or in
+tests via [`on.exit()`](https://rdrr.io/r/base/on.exit.html). The
+private `finalize()` method calls this automatically when the object is
+garbage collected.
+
+#### Returns
+
+Returns `NULL` invisibly; called for side effects.
 
 ------------------------------------------------------------------------
 

@@ -19,7 +19,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="../index.html">movexplR6</a>
 
@@ -83,7 +83,7 @@ package.</li>
 </ul>
 <p>This combination gives a Shiny app everything a package provides:
 proper dependency management, a documentation system, unit tests, and
-vignettes — without any extra tooling.</p>
+vignettes - without any extra tooling.</p>
 </div>
 <div class="section level2">
 <h2 id="file-layout">File layout<a class="anchor" aria-label="anchor" href="#file-layout"></a>
@@ -176,7 +176,7 @@ edit it by hand.</p>
 <span><span class="fu">export</span><span class="op">(</span><span class="va">movies_server</span><span class="op">)</span></span>
 <span><span class="fu">export</span><span class="op">(</span><span class="va">movies_ui</span><span class="op">)</span></span></code></pre></div>
 <p>Exporting module functions and <code>MovieData</code> means users can
-call them directly — useful for composing the package with other
+call them directly - useful for composing the package with other
 packages or for testing.</p>
 </div>
 <div class="section level2">
@@ -219,17 +219,17 @@ single-purpose makes them easier to locate and test.</p>
 <tr class="odd">
 <td><code>movies_ui.R</code></td>
 <td>
-<code><a href="../reference/movies_ui.html">movies_ui()</a></code> — top-level layout</td>
+<code><a href="../reference/movies_ui.html">movies_ui()</a></code> - top-level layout</td>
 </tr>
 <tr class="even">
 <td><code>movies_server.R</code></td>
 <td>
-<code><a href="../reference/movies_server.html">movies_server()</a></code> — wires modules to MovieData</td>
+<code><a href="../reference/movies_server.html">movies_server()</a></code> - wires modules to MovieData</td>
 </tr>
 <tr class="odd">
 <td><code>launch_app.R</code></td>
 <td>
-<code><a href="../reference/launch_app.html">launch_app()</a></code> — calls
+<code><a href="../reference/launch_app.html">launch_app()</a></code> - calls
 <code><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shiny::shinyApp()</a></code>
 </td>
 </tr>
@@ -257,8 +257,8 @@ package is installed or loaded with
 path.</p>
 </div>
 <div class="section level2">
-<h2 id="app-r-the-entry-point">
-<code>app.R</code> — the entry point<a class="anchor" aria-label="anchor" href="#app-r-the-entry-point"></a>
+<h2 id="app-r---the-entry-point">
+<code>app.R</code> - the entry point<a class="anchor" aria-label="anchor" href="#app-r---the-entry-point"></a>
 </h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">pkgload</span><span class="fu">::</span><span class="fu"><a href="https://pkgload.r-lib.org/reference/load_all.html" class="external-link">load_all</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -345,7 +345,7 @@ modification:</p>
 <p>The key insight is that <code>devtools::load_all()</code> +
 <code><a href="../reference/launch_app.html">launch_app()</a></code> gives a fast edit-reload-test loop: edit a
 file in <code>R/</code>, call <code>load_all()</code> in the console,
-and run the app again — no install required.</p>
+and run the app again - no install required.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

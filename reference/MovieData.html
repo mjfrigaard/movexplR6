@@ -7,7 +7,7 @@ Shiny input values."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="../index.html">movexplR6</a>
 
@@ -89,10 +89,13 @@ the object is garbage collected.</p>
 </div><p></p><div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>db_path</code></dt>
-<dd><p>Path to the <code>movies.db</code> SQLite file.</p></dd>
+<dd><p>Path to the SQLite database file (e.g., <code>movies.db</code>).</p></dd>
 
 
 </dl><p></p></div>
+</div><p></p><div class="section">
+<h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
+<p>The initialized <code>MovieData</code> object invisibly.</p>
 </div>
 
 </div>
@@ -113,41 +116,48 @@ the object is garbage collected.</p>
 </div><p></p><div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>reviews</code></dt>
-<dd><p>Minimum number of Rotten Tomatoes reviews.</p></dd>
+<dd><p>Minimum number of Rotten Tomatoes reviews (default: 10).</p></dd>
 
       <dt><code>oscars</code></dt>
-<dd><p>Minimum number of Oscar wins.</p></dd>
+<dd><p>Minimum number of Oscar wins (default: 0).</p></dd>
 
       <dt><code>year</code></dt>
-<dd><p>Integer vector of length 2: <code>c(min_year, max_year)</code>.</p></dd>
+<dd><p>Integer vector of length 2: <code>c(min_year, max_year)</code> (default: <code>c(1940, 2014)</code>).</p></dd>
 
       <dt><code>boxoffice</code></dt>
-<dd><p>Numeric vector of length 2: box-office range in millions.</p></dd>
+<dd><p>Numeric vector of length 2: box-office range in millions (default: <code>c(0, 800)</code>).</p></dd>
 
       <dt><code>genre</code></dt>
-<dd><p>Genre string; <code>"All"</code> disables the filter.</p></dd>
+<dd><p>Genre string; <code>"All"</code> disables the filter (default: <code>"All"</code>).</p></dd>
 
       <dt><code>director</code></dt>
-<dd><p>Partial director name; empty string disables the filter.</p></dd>
+<dd><p>Partial director name; empty string disables the filter (default: <code>""</code>).</p></dd>
 
       <dt><code>cast</code></dt>
-<dd><p>Partial cast name; empty string disables the filter.</p></dd>
+<dd><p>Partial cast name; empty string disables the filter (default: <code>""</code>).</p></dd>
 
 
 </dl><p></p></div>
 </div><p></p><div class="section">
-<h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
-<p>A filtered data frame with an added <code>has_oscar</code> column.</p>
+<h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
+<p>A filtered data frame with rows matching all criteria and an added <code>has_oscar</code> column (<code>"Yes"</code> or <code>"No"</code>).</p>
 </div>
 
 </div>
 
 <p></p><hr><a id="method-MovieData-disconnect"></a><div class="section">
 <h3 id="moviedata-disconnect-"><code>MovieData$disconnect()</code><a class="anchor" aria-label="anchor" href="#moviedata-disconnect-"></a></h3>
-<p>Explicitly close the database connection.
-Call this from <code><a href="https://rdrr.io/pkg/shiny/man/onStop.html" class="external-link">shiny::onStop()</a></code> or in tests via <code><a href="https://rdrr.io/r/base/on.exit.html" class="external-link">on.exit()</a></code>.</p><div class="section">
+<p>Explicitly close the database connection.</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">MovieData</span><span class="op">$</span><span class="fu">disconnect</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div><p></p><div class="section">
+<h4 id="details-1">Details<a class="anchor" aria-label="anchor" href="#details-1"></a></h4>
+<p>Call this from <code><a href="https://rdrr.io/pkg/shiny/man/onStop.html" class="external-link">shiny::onStop()</a></code> or in tests via <code><a href="https://rdrr.io/r/base/on.exit.html" class="external-link">on.exit()</a></code>.
+The private <code>finalize()</code> method calls this automatically when the object
+is garbage collected.</p>
+</div><p></p><div class="section">
+<h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
+<p>Returns <code>NULL</code> invisibly; called for side effects.</p>
 </div>
 
 </div>

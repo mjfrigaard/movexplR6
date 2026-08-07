@@ -6,10 +6,10 @@ A Shiny module is a self-contained unit of UI and server logic
 identified by a namespace ID. Modules solve two problems that appear as
 apps grow:
 
-1.  **ID collisions** — two inputs named `"genre"` in different parts of
+1.  **ID collisions** - two inputs named `"genre"` in different parts of
     the app would clash. Modules prefix every ID with their namespace so
     `"filters-genre"` and `"plot-genre"` never conflict.
-2.  **Coupling** — without modules, server logic for unrelated features
+2.  **Coupling** - without modules, server logic for unrelated features
     shares the same `input`, `output`, and `session` objects. Modules
     give each feature its own scope.
 
@@ -33,7 +33,7 @@ mod_filters_ui <- function(id) {
 When the server function calls `shiny::moduleServer(id, ...)`, Shiny
 automatically applies the same namespace to `input`, `output`, and
 `session`, so `input$reviews` inside the module body refers to
-`"filters-reviews"` in the global session — without the module author or
+`"filters-reviews"` in the global session - without the module author or
 the caller having to think about it.
 
 ## Data flow
@@ -77,7 +77,7 @@ mod_filters_ui <- function(id) {
 ### Server
 
 `mod_filters_server(id)` **returns** a reactive list. This is the
-module’s output — the value it hands back to whoever called it.
+module’s output - the value it hands back to whoever called it.
 
 ``` r
 
@@ -126,7 +126,7 @@ shiny::testServer(mod_filters_server, {
 })
 ```
 
-`session$returned()` retrieves whatever the module server returned —
+`session$returned()` retrieves whatever the module server returned -
 here the reactive list.
 
 ## `mod_plot`
@@ -151,9 +151,9 @@ mod_plot_ui <- function(id) {
 
 ### Server
 
-`mod_plot_server(id, movies, filters)` takes **two reactive arguments**
-— the filtered data frame and the filter selections — passed in from the
-parent server.
+`mod_plot_server(id, movies, filters)` takes **two reactive
+arguments** - the filtered data frame and the filter selections - passed
+in from the parent server.
 
 ``` r
 
@@ -277,5 +277,5 @@ object, calls
 to get the `filters` reactive, derives `movies` from it, then passes
 both to
 [`mod_plot_server()`](https://mjfrigaard.github.io/movexplR6/reference/mod_plot_server.md).
-No output rendering happens here — that is fully delegated to the
+No output rendering happens here - that is fully delegated to the
 modules.
