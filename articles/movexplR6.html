@@ -104,9 +104,9 @@ and <code>$finalize()</code> for cleaning up the connection.</p>
 </h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">md</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/MovieData.html">MovieData</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">db_path</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2026-11-04 05:50:16] Connecting to database: /home/runner/.cache/R/renv/library/movexplR6-8fe87c7d/linux-ubuntu-resolute/R-4.6/x86_64-pc-linux-gnu/movexplR6/extdata/movies.db</span></span>
-<span><span class="co">#&gt; INFO [2026-11-04 05:50:16] Database connection established</span></span>
-<span><span class="co">#&gt; INFO [2026-11-04 05:50:16] Loaded 12569 movies into memory</span></span></code></pre></div>
+<span><span class="co">#&gt; INFO [2026-11-06 20:17:25] Connecting to database: /home/runner/.cache/R/renv/library/movexplR6-8fe87c7d/linux-ubuntu-resolute/R-4.6/x86_64-pc-linux-gnu/movexplR6/extdata/movies.db</span></span>
+<span><span class="co">#&gt; INFO [2026-11-06 20:17:25] Database connection established</span></span>
+<span><span class="co">#&gt; INFO [2026-11-06 20:17:26] Loaded 12569 movies into memory</span></span></code></pre></div>
 <p>On initialization the class:</p>
 <ol style="list-style-type: decimal">
 <li>Opens a <code>DBI</code> connection to the SQLite file.</li>
@@ -204,7 +204,7 @@ private <code>finalize()</code> method delegates to
 object is garbage collected.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">md</span><span class="op">$</span><span class="fu">disconnect</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO [2026-11-04 05:50:17] Database connection closed</span></span>
+<span><span class="co">#&gt; INFO [2026-11-06 20:17:26] Database connection closed</span></span>
 <span><span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbIsValid.html" class="external-link">dbIsValid</a></span><span class="op">(</span><span class="va">md</span><span class="op">$</span><span class="va">con</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] FALSE</span></span></code></pre></div>
 </div>
